@@ -26,6 +26,7 @@ import org.pkl.core.http.HttpClient;
 import org.pkl.core.module.ModuleKeyFactories;
 import org.pkl.core.module.ModuleKeys;
 import org.pkl.core.module.ResolvedModuleKey;
+import org.pkl.core.sftp.SftpPklClient;
 
 public abstract class StdLibModule {
   @TruffleBoundary
@@ -41,6 +42,7 @@ public abstract class StdLibModule {
                       StackFrameTransformers.defaultTransformer,
                       SecurityManagers.defaultManager,
                       HttpClient.dummyClient(),
+                      SftpPklClient.dummyClient(),
                       new ModuleResolver(List.of(ModuleKeyFactories.standardLibrary)),
                       new ResourceManager(SecurityManagers.defaultManager, List.of()),
                       Loggers.noop(),

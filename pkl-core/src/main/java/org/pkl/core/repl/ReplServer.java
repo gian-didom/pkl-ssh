@@ -49,6 +49,7 @@ import org.pkl.core.repl.ReplResponse.EvalSuccess;
 import org.pkl.core.repl.ReplResponse.InvalidRequest;
 import org.pkl.core.resource.ResourceReader;
 import org.pkl.core.runtime.*;
+import org.pkl.core.sftp.SftpPklClient;
 import org.pkl.core.util.EconomicMaps;
 import org.pkl.core.util.IoUtils;
 import org.pkl.core.util.MutableReference;
@@ -69,6 +70,7 @@ public class ReplServer implements AutoCloseable {
   public ReplServer(
       SecurityManager securityManager,
       HttpClient httpClient,
+      SftpPklClient sftpClient,
       Logger logger,
       Collection<ModuleKeyFactory> moduleKeyFactories,
       Collection<ResourceReader> resourceReaders,
@@ -102,6 +104,7 @@ public class ReplServer implements AutoCloseable {
                       frameTransformer,
                       securityManager,
                       httpClient,
+                      sftpClient,
                       moduleResolver,
                       new ResourceManager(securityManager, resourceReaders),
                       logger,

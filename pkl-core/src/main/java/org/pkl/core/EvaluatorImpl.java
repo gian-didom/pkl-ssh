@@ -53,6 +53,7 @@ import org.pkl.core.runtime.VmTyped;
 import org.pkl.core.runtime.VmUtils;
 import org.pkl.core.runtime.VmValue;
 import org.pkl.core.runtime.VmValueRenderer;
+import org.pkl.core.sftp.SftpPklClient;
 import org.pkl.core.util.ErrorMessages;
 import org.pkl.core.util.Nullable;
 
@@ -71,6 +72,7 @@ public class EvaluatorImpl implements Evaluator {
       StackFrameTransformer transformer,
       SecurityManager manager,
       HttpClient httpClient,
+      SftpPklClient sftpClient,
       Logger logger,
       Collection<ModuleKeyFactory> factories,
       Collection<ResourceReader> readers,
@@ -95,6 +97,7 @@ public class EvaluatorImpl implements Evaluator {
                       transformer,
                       manager,
                       httpClient,
+                      sftpClient,
                       moduleResolver,
                       new ResourceManager(manager, readers),
                       this.logger,

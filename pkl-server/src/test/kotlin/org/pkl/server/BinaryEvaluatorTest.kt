@@ -24,6 +24,7 @@ import org.pkl.core.*
 import org.pkl.core.http.HttpClient
 import org.pkl.core.module.ModuleKeyFactories
 import org.pkl.core.resource.ResourceReaders
+import org.pkl.core.sftp.SftpPklClient
 
 class BinaryEvaluatorTest {
   private val evaluator =
@@ -36,6 +37,7 @@ class BinaryEvaluatorTest {
         Path.of("")
       ),
       HttpClient.dummyClient(),
+      SftpPklClient.dummyClient(),
       Loggers.noop(),
       listOf(ModuleKeyFactories.standardLibrary),
       listOf(ResourceReaders.environmentVariable(), ResourceReaders.externalProperty()),

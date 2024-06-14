@@ -42,6 +42,7 @@ public final class SecurityManagers {
           Pattern.compile("jar:file:"),
           Pattern.compile("modulepath:"),
           Pattern.compile("https:"),
+          Pattern.compile("sftp:"),
           Pattern.compile("pkl:"),
           Pattern.compile("package:"),
           Pattern.compile("projectpackage:"));
@@ -58,7 +59,8 @@ public final class SecurityManagers {
           Pattern.compile("modulepath:"),
           Pattern.compile("package:"),
           Pattern.compile("projectpackage:"),
-          Pattern.compile("https:"));
+          Pattern.compile("https:"),
+          Pattern.compile("sftp:"));
 
   /**
    * Returns the mapping from module URIs to trust levels used by the {@link #defaultManager default

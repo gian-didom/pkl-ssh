@@ -29,6 +29,7 @@ import org.pkl.core.project.Project;
 import org.pkl.core.resource.ResourceReader;
 import org.pkl.core.resource.ResourceReaders;
 import org.pkl.core.runtime.LoggerImpl;
+import org.pkl.core.sftp.SftpPklClient;
 import org.pkl.core.util.IoUtils;
 import org.pkl.core.util.Nullable;
 
@@ -42,6 +43,8 @@ public final class EvaluatorBuilder {
   // Default to a client with a fixed set of built-in certificates.
   // Make it lazy to avoid creating a client unnecessarily.
   private HttpClient httpClient = HttpClient.builder().buildLazily();
+
+  private SftpPklClient sftpClient = SftpPklClient.builder().buildLazily();
 
   private Logger logger = Loggers.noop();
 
@@ -101,6 +104,7 @@ public final class EvaluatorBuilder {
         .addResourceReader(ResourceReaders.externalProperty())
         .addResourceReader(ResourceReaders.file())
         .addResourceReader(ResourceReaders.http())
+        .addResourceReader(ResourceReaders.sftp())
         .addResourceReader(ResourceReaders.https())
         .addResourceReader(ResourceReaders.pkg())
         .addResourceReader(ResourceReaders.projectpackage())
@@ -121,6 +125,7 @@ public final class EvaluatorBuilder {
         .addModuleKeyFactories(ModuleKeyFactories.fromServiceProviders())
         .addModuleKeyFactory(ModuleKeyFactories.file)
         .addModuleKeyFactory(ModuleKeyFactories.http)
+        .addModuleKeyFactory(ModuleKeyFactories.sftp)
         .addModuleKeyFactory(ModuleKeyFactories.pkg)
         .addModuleKeyFactory(ModuleKeyFactories.projectpackage)
         .addModuleKeyFactory(ModuleKeyFactories.genericUrl)
@@ -490,6 +495,7 @@ public final class EvaluatorBuilder {
         stackFrameTransformer,
         securityManager,
         httpClient,
+        sftpClient,
         new LoggerImpl(logger, stackFrameTransformer),
         // copy to shield against subsequent modification through builder
         new ArrayList<>(moduleKeyFactories),

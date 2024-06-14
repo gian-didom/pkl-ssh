@@ -8,7 +8,8 @@ import org.pkl.commons.test.FileTestUtils
 import org.pkl.commons.test.PackageServer
 import org.pkl.commons.writeString
 import org.pkl.core.*
-import org.pkl.core.http.HttpClient
+import org.pkl.core.http.HttpClient;
+import org.pkl.core.sftp.SftpPklClient
 import org.pkl.core.packages.PackageUri
 import org.pkl.core.evaluatorSettings.PklEvaluatorSettings
 import java.net.URI

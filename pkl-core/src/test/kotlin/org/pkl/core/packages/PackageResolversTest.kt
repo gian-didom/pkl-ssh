@@ -11,7 +11,8 @@ import org.pkl.commons.readString
 import org.pkl.commons.test.FileTestUtils
 import org.pkl.commons.test.PackageServer
 import org.pkl.commons.test.listFilesRecursively
-import org.pkl.core.http.HttpClient
+import org.pkl.core.http.HttpClient;
+import org.pkl.core.sftp.SftpPklClient
 import org.pkl.core.SecurityManagers
 import org.pkl.core.module.PathElement
 import java.io.FileNotFoundException

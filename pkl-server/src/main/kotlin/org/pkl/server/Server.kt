@@ -29,6 +29,7 @@ import org.pkl.core.packages.PackageUri
 import org.pkl.core.project.DeclaredDependencies
 import org.pkl.core.resource.ResourceReader
 import org.pkl.core.resource.ResourceReaders
+import org.pkl.core.sftp.SftpPklClient
 import org.pkl.core.util.IoUtils
 
 class Server(private val transport: MessageTransport) : AutoCloseable {
@@ -171,6 +172,8 @@ class Server(private val transport: MessageTransport) : AutoCloseable {
         message.http?.caCertificates?.let { caCertificates -> addCertificates(caCertificates) }
         buildLazily()
       }
+    val sftpClient = with(SftpPklClient.builder()) { buildLazily() }
+
     val dependencies =
       message.project?.let { proj ->
         buildDeclaredDependencies(proj.projectFileUri, proj.dependencies, null)
@@ -185,6 +188,7 @@ class Server(private val transport: MessageTransport) : AutoCloseable {
         rootDir
       ),
       httpClient,
+      sftpClient,
       ClientLogger(evaluatorId, transport),
       createModuleKeyFactories(message, evaluatorId, resolver),
       createResourceReaders(message, evaluatorId, resolver),
@@ -207,6 +211,7 @@ class Server(private val transport: MessageTransport) : AutoCloseable {
     add(ResourceReaders.file())
     add(ResourceReaders.http())
     add(ResourceReaders.https())
+    add(ResourceReaders.sftp())
     add(ResourceReaders.pkg())
     add(ResourceReaders.projectpackage())
     add(ResourceReaders.modulePath(modulePathResolver))
@@ -233,6 +238,7 @@ class Server(private val transport: MessageTransport) : AutoCloseable {
     add(ModuleKeyFactories.pkg)
     add(ModuleKeyFactories.projectpackage)
     add(ModuleKeyFactories.http)
+    add(ModuleKeyFactories.sftp)
     add(ModuleKeyFactories.genericUrl)
   }
 }

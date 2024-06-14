@@ -29,6 +29,7 @@ val relocations = mapOf(
   "org.snakeyaml.engine." to "org.pkl.thirdparty.snakeyaml.engine.",
   "org.msgpack." to "org.pkl.thirdparty.msgpack.",
   "org.w3c.dom." to "org.pkl.thirdparty.w3c.dom",
+  "org.apache." to "org.pkl.thirdparty.apache.",
   "com.oracle.svm.core." to "org.pkl.thirdparty.svm.",
 
   // pkl-cli dependencies

@@ -4,7 +4,8 @@ import org.pkl.commons.test.PackageServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.pkl.core.http.HttpClient
+import org.pkl.core.http.HttpClient;
+import org.pkl.core.sftp.SftpPklClient
 
 class StackFrameTransformersTest {
   // TODO figure out how to test this; right now this fails because there is no VM context.

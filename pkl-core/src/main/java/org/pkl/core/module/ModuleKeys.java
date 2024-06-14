@@ -118,6 +118,11 @@ public final class ModuleKeys {
     return new Http(url);
   }
 
+  /** Creates a module key for {@code http:} and {@code https:} uris. */
+  public static ModuleKey sftp(URI url) {
+    return new Sftp(url);
+  }
+
   /** Creates a module key for the given package. */
   public static ModuleKey pkg(URI uri) throws URISyntaxException {
     var assetUri = new PackageAssetUri(uri);
@@ -497,6 +502,44 @@ public final class ModuleKeys {
         // intentionally use uri instead of response.uri()
         return ResolvedModuleKeys.virtual(this, uri, text, true);
       }
+    }
+  }
+
+  private static class Sftp implements ModuleKey {
+
+    private final URI uri;
+
+    Sftp(URI uri) {
+      this.uri = uri;
+    }
+
+    @Override
+    public URI getUri() {
+      return uri;
+    }
+
+    @Override
+    public boolean hasHierarchicalUris() {
+      return true;
+    }
+
+    @Override
+    public boolean isGlobbable() {
+      return false;
+    }
+
+    @Override
+    public ResolvedModuleKey resolve(SecurityManager securityManager)
+        throws IOException, SecurityManagerException {
+      var sftpClient = VmContext.get(null).getSftpPklClient();
+      String username = uri.getUserInfo();
+      sftpClient.setUsername(uri.getUserInfo());
+      sftpClient.setHost(uri.getHost());
+      // Extract path from URI
+      String path = uri.getPath();
+      byte[] bytes = sftpClient.download(path);
+      String text = new String(bytes, StandardCharsets.UTF_8);
+      return ResolvedModuleKeys.virtual(this, uri, text, true);
     }
   }
 

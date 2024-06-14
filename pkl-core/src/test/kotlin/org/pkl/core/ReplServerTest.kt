@@ -3,7 +3,8 @@ package org.pkl.core
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.pkl.commons.toPath
-import org.pkl.core.http.HttpClient
+import org.pkl.core.http.HttpClient;
+import org.pkl.core.sftp.SftpPklClient
 import org.pkl.core.module.ModuleKeyFactories
 import org.pkl.core.repl.ReplRequest
 import org.pkl.core.repl.ReplResponse
@@ -14,6 +15,7 @@ class ReplServerTest {
   private val server = ReplServer(
     SecurityManagers.defaultManager,
     HttpClient.dummyClient(),
+    SftpPklClient.dummyClient(),
     Loggers.stdErr(),
     listOf(
       ModuleKeyFactories.standardLibrary,

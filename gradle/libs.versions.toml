@@ -1,5 +1,6 @@
 [versions] # ordered alphabetically
 antlr = "4.+"
+apacheSshdMina = "2.12.1+"
 assertj = "3.+" 
 checksumPlugin = "1.2.0"
 clikt = "3.5.1"
@@ -52,6 +53,8 @@ wiremock = "3.+"
 [libraries] # ordered alphabetically
 antlr = { group = "com.tunnelvisionlabs", name = "antlr4", version.ref = "antlr" }
 antlrRuntime = { group = "com.tunnelvisionlabs", name = "antlr4-runtime", version.ref = "antlr" }
+apacheSshdMinaCore = { group = "org.apache.sshd", name = "sshd-core", version.ref = "apacheSshdMina" }
+apacheSshdMinaSFTP = { group = "org.apache.sshd", name = "sshd-sftp", version.ref = "apacheSshdMina" }
 assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
 clikt = { group = "com.github.ajalt.clikt", name = "clikt", version.ref = "clikt" }
 commonMark = { group = "org.commonmark", name = "commonmark", version.ref = "commonMark" }

@@ -8,7 +8,8 @@ import org.pkl.commons.test.FileTestUtils
 import org.pkl.commons.test.InputOutputTestEngine
 import org.pkl.commons.test.PackageServer
 import org.pkl.commons.test.PklExecutablePaths
-import org.pkl.core.http.HttpClient
+import org.pkl.core.http.HttpClient;
+import org.pkl.core.sftp.SftpPklClient
 import org.pkl.core.project.Project
 import org.pkl.core.util.IoUtils
 import java.io.PrintWriter

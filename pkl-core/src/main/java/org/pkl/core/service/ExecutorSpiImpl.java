@@ -102,6 +102,7 @@ public final class ExecutorSpiImpl implements ExecutorSpi {
             .addResourceReader(ResourceReaders.file())
             .addResourceReader(ResourceReaders.http())
             .addResourceReader(ResourceReaders.https())
+            .addResourceReader(ResourceReaders.sftp())
             .addModuleKeyFactory(ModuleKeyFactories.standardLibrary)
             .addModuleKeyFactories(ModuleKeyFactories.fromServiceProviders())
             .addModuleKeyFactory(ModuleKeyFactories.modulePath(resolver))

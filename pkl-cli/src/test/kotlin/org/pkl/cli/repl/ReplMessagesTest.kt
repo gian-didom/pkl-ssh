@@ -26,12 +26,14 @@ import org.pkl.core.module.ModuleKeyFactories
 import org.pkl.core.repl.ReplRequest
 import org.pkl.core.repl.ReplResponse
 import org.pkl.core.repl.ReplServer
+import org.pkl.core.sftp.SftpPklClient
 
 class ReplMessagesTest {
   private val server =
     ReplServer(
       SecurityManagers.defaultManager,
       HttpClient.dummyClient(),
+      SftpPklClient.dummyClient(),
       Loggers.stdErr(),
       listOf(ModuleKeyFactories.standardLibrary),
       listOf(),

@@ -25,7 +25,8 @@ import org.pkl.core.repl.ReplServer
 import org.pkl.core.resource.ResourceReaders
 import org.pkl.core.util.IoUtils
 import org.antlr.v4.runtime.ParserRuleContext
-import org.pkl.core.http.HttpClient
+import org.pkl.core.http.HttpClient;
+import org.pkl.core.sftp.SftpPklClient
 import java.nio.file.Files
 import kotlin.io.path.isDirectory
 import kotlin.io.path.isRegularFile

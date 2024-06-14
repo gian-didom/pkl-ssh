@@ -25,11 +25,13 @@ import org.pkl.core.module.ModuleKeyFactory
 import org.pkl.core.project.DeclaredDependencies
 import org.pkl.core.resource.ResourceReader
 import org.pkl.core.runtime.*
+import org.pkl.core.sftp.SftpPklClient
 
 internal class BinaryEvaluator(
   transformer: StackFrameTransformer,
   manager: SecurityManager,
   httpClient: HttpClient,
+  SftpPklClient: SftpPklClient,
   logger: Logger,
   factories: Collection<ModuleKeyFactory?>,
   readers: Collection<ResourceReader?>,
@@ -44,6 +46,7 @@ internal class BinaryEvaluator(
     transformer,
     manager,
     httpClient,
+    SftpPklClient,
     logger,
     factories,
     readers,

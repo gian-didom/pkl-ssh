@@ -26,6 +26,7 @@ import org.pkl.core.StackFrameTransformer;
 import org.pkl.core.http.HttpClient;
 import org.pkl.core.module.ProjectDependenciesManager;
 import org.pkl.core.packages.PackageResolver;
+import org.pkl.core.sftp.SftpPklClient;
 import org.pkl.core.util.LateInit;
 import org.pkl.core.util.Nullable;
 
@@ -41,6 +42,7 @@ public final class VmContext {
     private final StackFrameTransformer frameTransformer;
     private final SecurityManager securityManager;
     private final HttpClient httpClient;
+    private final SftpPklClient sftpClient;
     private final ModuleResolver moduleResolver;
     private final ResourceManager resourceManager;
     private final Logger logger;
@@ -55,6 +57,7 @@ public final class VmContext {
         StackFrameTransformer frameTransformer,
         SecurityManager securityManager,
         HttpClient httpClient,
+        SftpPklClient sftpClient,
         ModuleResolver moduleResolver,
         ResourceManager resourceManager,
         Logger logger,
@@ -68,6 +71,7 @@ public final class VmContext {
       this.frameTransformer = frameTransformer;
       this.securityManager = securityManager;
       this.httpClient = httpClient;
+      this.sftpClient = sftpClient;
       this.moduleResolver = moduleResolver;
       this.resourceManager = resourceManager;
       this.logger = logger;
@@ -114,6 +118,10 @@ public final class VmContext {
 
   public HttpClient getHttpClient() {
     return holder.httpClient;
+  }
+
+  public SftpPklClient getSftpPklClient() {
+    return holder.sftpClient;
   }
 
   public ModuleResolver getModuleResolver() {

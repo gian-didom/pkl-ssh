@@ -23,6 +23,7 @@ import org.pkl.commons.test.InputOutputTestEngine
 import org.pkl.core.*
 import org.pkl.core.http.HttpClient
 import org.pkl.core.module.ModuleKeyFactories
+import org.pkl.core.sftp.SftpPklClient
 
 @Testable class BinaryEvaluatorSnippetTests
 
@@ -47,6 +48,7 @@ class BinaryEvaluatorSnippetTestEngine : InputOutputTestEngine() {
       StackFrameTransformers.empty,
       SecurityManagers.defaultManager,
       HttpClient.dummyClient(),
+      SftpPklClient.dummyClient(),
       Loggers.stdErr(),
       listOf(ModuleKeyFactories.file),
       listOf(),

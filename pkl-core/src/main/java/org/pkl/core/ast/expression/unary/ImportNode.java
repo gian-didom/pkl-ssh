@@ -22,7 +22,6 @@ import com.oracle.truffle.api.nodes.NodeInfo;
 import com.oracle.truffle.api.source.SourceSection;
 import java.net.URI;
 import org.pkl.core.SecurityManagerException;
-import org.pkl.core.http.HttpClientInitException;
 import org.pkl.core.module.ResolvedModuleKey;
 import org.pkl.core.packages.PackageLoadError;
 import org.pkl.core.runtime.VmContext;

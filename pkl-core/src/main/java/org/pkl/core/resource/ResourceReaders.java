@@ -43,6 +43,7 @@ import org.pkl.core.util.ErrorMessages;
 import org.pkl.core.util.HttpUtils;
 import org.pkl.core.util.IoUtils;
 import org.pkl.core.util.Nullable;
+import org.pkl.core.util.SftpUtils;
 
 /** Predefined resource readers for OS environment variables and external properties. */
 public final class ResourceReaders {
@@ -92,6 +93,17 @@ public final class ResourceReaders {
    */
   public static ResourceReader https() {
     return HttpsResource.INSTANCE;
+  }
+
+  /**
+   * A resource reader for SSH resources. If this resource reader is present, Pkl code can read SSH
+   * resource {@code sftp://apple.com/foo/bar.txt} with {@code
+   * read("sftp://apple.com/foo/bar.txt")}, provided that resource URI {@code
+   * "sftp://apple.com/foo/bar.txt"} matches an entry in the resource allowlist ({@code
+   * --allowed-resources}).
+   */
+  public static ResourceReader sftp() {
+    return SftpResource.INSTANCE;
   }
 
   /**
@@ -291,6 +303,25 @@ public final class ResourceReaders {
     }
   }
 
+  private static final class SftpResource extends UrlResource {
+    static final ResourceReader INSTANCE = new SftpResource();
+
+    @Override
+    public String getUriScheme() {
+      return "sftp";
+    }
+
+    @Override
+    public boolean hasHierarchicalUris() {
+      return true;
+    }
+
+    @Override
+    public boolean isGlobbable() {
+      return false;
+    }
+  }
+
   private abstract static class UrlResource implements ResourceReader {
     @Override
     public Optional<Object> read(URI uri) throws IOException {
@@ -301,6 +332,17 @@ public final class ResourceReaders {
         if (response.statusCode() == 404) return Optional.empty();
         HttpUtils.checkHasStatusCode200(response);
         return Optional.of(new Resource(uri, response.body()));
+      }
+
+      if (SftpUtils.isSshUrl(uri)) {
+        var sftpClient = VmContext.get(null).getSftpPklClient();
+        String username = uri.getUserInfo();
+        String host = uri.getHost();
+        sftpClient.setUsername(username);
+        sftpClient.setHost(host);
+        String path = uri.getPath();
+        var bytes = sftpClient.download(path);
+        return Optional.of(new Resource(uri, bytes));
       }
 
       try {

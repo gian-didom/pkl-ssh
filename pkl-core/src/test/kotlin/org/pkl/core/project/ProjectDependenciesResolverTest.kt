@@ -7,7 +7,8 @@ import org.junit.jupiter.api.assertThrows
 import org.pkl.commons.test.FileTestUtils
 import org.pkl.commons.test.PackageServer
 import org.pkl.commons.toPath
-import org.pkl.core.http.HttpClient
+import org.pkl.core.http.HttpClient;
+import org.pkl.core.sftp.SftpPklClient
 import org.pkl.core.PklException
 import org.pkl.core.SecurityManagers
 import org.pkl.core.packages.PackageResolver

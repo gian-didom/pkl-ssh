@@ -40,6 +40,9 @@ public final class ModuleKeyFactories {
   /** A factory for {@code http:} and {@code https:} module keys. */
   public static final ModuleKeyFactory http = new Http();
 
+  /** A factory for {@code sftp:} and {@code sftp:} module keys. */
+  public static final ModuleKeyFactory sftp = new Sftp();
+
   /** A factory for URL based module keys. */
   public static final ModuleKeyFactory genericUrl = new GenericUrl();
 
@@ -149,6 +152,10 @@ public final class ModuleKeyFactories {
       if (uri.getScheme().equalsIgnoreCase("jar")) {
         return Optional.empty();
       }
+      // don't handle sftp URIs (these are handled by sftp handler).
+      if (uri.getScheme().equalsIgnoreCase("sftp")) {
+        return Optional.empty();
+      }
       for (FileSystemProvider provider : FileSystemProvider.installedProviders()) {
         if (provider.getScheme().equalsIgnoreCase(uri.getScheme())) {
           return Optional.of(ModuleKeys.file(uri));
@@ -166,6 +173,19 @@ public final class ModuleKeyFactories {
       var scheme = uri.getScheme();
       if ("http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme)) {
         return Optional.of(ModuleKeys.http(uri));
+      }
+      return Optional.empty();
+    }
+  }
+
+  private static class Sftp implements ModuleKeyFactory {
+    private Sftp() {}
+
+    @Override
+    public Optional<ModuleKey> create(URI uri) {
+      var scheme = uri.getScheme();
+      if ("sftp".equalsIgnoreCase(scheme) || "sftp".equalsIgnoreCase(scheme)) {
+        return Optional.of(ModuleKeys.sftp(uri));
       }
       return Optional.empty();
     }

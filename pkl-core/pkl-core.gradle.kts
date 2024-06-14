@@ -50,6 +50,8 @@ dependencies {
   implementation(libs.antlrRuntime)
   implementation(libs.truffleApi)
   implementation(libs.graalSdk)
+  implementation(libs.apacheSshdMinaCore)
+  implementation(libs.apacheSshdMinaSFTP)
 
   implementation(libs.paguro) {
     exclude(group = "org.jetbrains", module = "annotations")

@@ -37,6 +37,7 @@ internal class CliRepl(private val options: CliEvaluatorOptions) : CliCommand(op
             rootDir
           ),
           httpClient,
+          sftpClient,
           Loggers.stdErr(),
           listOf(
             ModuleKeyFactories.standardLibrary,
@@ -46,6 +47,7 @@ internal class CliRepl(private val options: CliEvaluatorOptions) : CliCommand(op
             listOf(
               ModuleKeyFactories.file,
               ModuleKeyFactories.http,
+              ModuleKeyFactories.sftp,
               ModuleKeyFactories.pkg,
               ModuleKeyFactories.projectpackage,
               ModuleKeyFactories.genericUrl
@@ -56,6 +58,7 @@ internal class CliRepl(private val options: CliEvaluatorOptions) : CliCommand(op
             ResourceReaders.modulePath(modulePathResolver),
             ResourceReaders.file(),
             ResourceReaders.http(),
+            ResourceReaders.sftp(),
             ResourceReaders.https(),
             ResourceReaders.pkg(),
             ResourceReaders.projectpackage()
