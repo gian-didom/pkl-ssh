@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import org.pkl.core.Release;
-import org.pkl.core.sftp.SftpPklClient.Builder;
+import org.pkl.core.http.HttpClient.Builder;
 
 final class HttpClientBuilder implements HttpClient.Builder {
   private String userAgent;

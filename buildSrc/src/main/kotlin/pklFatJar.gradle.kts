@@ -30,8 +30,9 @@ val relocations = mapOf(
   "org.msgpack." to "org.pkl.thirdparty.msgpack.",
   "org.w3c.dom." to "org.pkl.thirdparty.w3c.dom",
   "org.apache." to "org.pkl.thirdparty.apache.",
+  "org.slf4j." to "org.pkl.thirdparty.slf4j.",
   "com.oracle.svm.core." to "org.pkl.thirdparty.svm.",
-
+  
   // pkl-cli dependencies
   "org.jline." to "org.pkl.thirdparty.jline.",
   "com.github.ajalt.clikt." to "org.pkl.thirdparty.clikt.",

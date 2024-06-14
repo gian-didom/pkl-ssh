@@ -29,6 +29,7 @@ import org.pkl.core.project.Project
 import org.pkl.core.resource.ResourceReader
 import org.pkl.core.resource.ResourceReaders
 import org.pkl.core.settings.PklSettings
+import org.pkl.core.sftp.SftpPklClient
 import org.pkl.core.util.IoUtils
 
 /** Building block for CLI commands. Configured programmatically to allow for embedding. */
@@ -197,6 +198,8 @@ abstract class CliCommand(protected val cliOptions: CliBaseOptions) {
       buildLazily()
     }
   }
+
+  val sftpClient: SftpPklClient by lazy { with(SftpPklClient.builder()) { buildLazily() } }
 
   protected fun moduleKeyFactories(modulePathResolver: ModulePathResolver): List<ModuleKeyFactory> {
     return buildList {

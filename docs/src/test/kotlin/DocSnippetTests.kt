@@ -81,6 +81,7 @@ class DocSnippetTestsEngine : HierarchicalTestEngine<DocSnippetTestsEngine.Execu
     val replServer = ReplServer(
       SecurityManagers.defaultManager,
       HttpClient.dummyClient(),
+      SftpPklClient.dummyClient(),
       Loggers.stdErr(),
       listOf(
         ModuleKeyFactories.standardLibrary,
