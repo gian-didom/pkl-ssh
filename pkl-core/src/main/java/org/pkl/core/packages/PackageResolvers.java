@@ -52,6 +52,7 @@ import org.pkl.core.module.PathElement;
 import org.pkl.core.module.PathElement.TreePathElement;
 import org.pkl.core.runtime.FileSystemManager;
 import org.pkl.core.runtime.VmExceptionBuilder;
+import org.pkl.core.sftp.SftpPklClient;
 import org.pkl.core.util.ByteArrayUtils;
 import org.pkl.core.util.EconomicMaps;
 import org.pkl.core.util.HttpUtils;
@@ -71,13 +72,17 @@ final class PackageResolvers {
 
     protected final HttpClient httpClient;
 
+    protected final SftpPklClient sftpClient;
+
     private final AtomicBoolean isClosed = new AtomicBoolean();
 
     protected final Object lock = new Object();
 
-    protected AbstractPackageResolver(SecurityManager securityManager, HttpClient httpClient) {
+    protected AbstractPackageResolver(
+        SecurityManager securityManager, HttpClient httpClient, SftpPklClient sftpClient) {
       this.securityManager = securityManager;
       this.httpClient = httpClient;
+      this.sftpClient = sftpClient;
       cachedDependencyMetadata = EconomicMaps.create();
     }
 
@@ -256,8 +261,9 @@ final class PackageResolvers {
     private final EconomicMap<PackageUri, TreePathElement> cachedTreePathElementRoots =
         EconomicMaps.create();
 
-    InMemoryPackageResolver(SecurityManager securityManager, HttpClient httpClient) {
-      super(securityManager, httpClient);
+    InMemoryPackageResolver(
+        SecurityManager securityManager, HttpClient httpClient, SftpPklClient sftpClient) {
+      super(securityManager, httpClient, sftpClient);
     }
 
     private byte[] getPackageBytes(PackageUri packageUri, DependencyMetadata metadata)
@@ -424,8 +430,11 @@ final class PackageResolvers {
             PosixFilePermission.OTHERS_READ);
 
     public DiskCachedPackageResolver(
-        SecurityManager securityManager, HttpClient httpClient, Path cacheDir) {
-      super(securityManager, httpClient);
+        SecurityManager securityManager,
+        HttpClient httpClient,
+        SftpPklClient sftpClient,
+        Path cacheDir) {
+      super(securityManager, httpClient, sftpClient);
       this.cacheDir = cacheDir;
       this.tmpDir = cacheDir.resolve("tmp");
     }

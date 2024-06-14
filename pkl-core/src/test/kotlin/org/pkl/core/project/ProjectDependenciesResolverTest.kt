@@ -31,13 +31,18 @@ class ProjectDependenciesResolverTest {
         .setTestPort(packageServer.port)
         .build()
     }
+
+    val sftpClient: SftpPklClient by lazy {
+      SftpPklClient.builder()
+        .build()
+    }
   }
 
   @Test
   fun resolveDependencies() {
     val project2Path = javaClass.getResource("project2/PklProject")!!.toURI().toPath()
     val project = Project.loadFromPath(project2Path)
-    val packageResolver = PackageResolver.getInstance(SecurityManagers.defaultManager, httpClient, null)
+    val packageResolver = PackageResolver.getInstance(SecurityManagers.defaultManager, httpClient, sftpClient, null)
     val deps = ProjectDependenciesResolver(project, packageResolver, System.out.writer()).resolve()
     val strDeps = ByteArrayOutputStream()
       .apply { deps.writeTo(this) }
@@ -75,7 +80,7 @@ class ProjectDependenciesResolverTest {
   fun `fails if project declares a package with an incorrect checksum`() {
     val projectPath = javaClass.getResource("badProjectChecksum/PklProject")!!.toURI().toPath()
     val project = Project.loadFromPath(projectPath)
-    val packageResolver = PackageResolver.getInstance(SecurityManagers.defaultManager, httpClient, null)
+    val packageResolver = PackageResolver.getInstance(SecurityManagers.defaultManager, httpClient, sftpClient, null)
     val e = assertThrows<PklException> {
       ProjectDependenciesResolver(project, packageResolver, System.err.writer()).resolve()
     }

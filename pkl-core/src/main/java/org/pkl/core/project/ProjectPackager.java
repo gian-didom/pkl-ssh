@@ -58,6 +58,7 @@ import org.pkl.core.packages.PackageResolver;
 import org.pkl.core.packages.PackageUri;
 import org.pkl.core.runtime.ModuleResolver;
 import org.pkl.core.runtime.VmExceptionBuilder;
+import org.pkl.core.sftp.SftpPklClient;
 import org.pkl.core.util.ByteArrayUtils;
 import org.pkl.core.util.ErrorMessages;
 import org.pkl.core.util.GlobResolver;
@@ -112,6 +113,7 @@ public final class ProjectPackager {
       StackFrameTransformer stackFrameTransformer,
       SecurityManager securityManager,
       HttpClient httpClient,
+      SftpPklClient sftpClient,
       boolean skipPublishCheck,
       Writer outputWriter) {
     this.projects = projects;
@@ -120,7 +122,8 @@ public final class ProjectPackager {
     this.stackFrameTransformer = stackFrameTransformer;
     this.securityManager = securityManager;
     // intentionally use InMemoryPackageResolver
-    this.packageResolver = PackageResolver.getInstance(securityManager, httpClient, null);
+    this.packageResolver =
+        PackageResolver.getInstance(securityManager, httpClient, sftpClient, null);
     this.skipPublishCheck = skipPublishCheck;
     this.outputWriter = outputWriter;
   }

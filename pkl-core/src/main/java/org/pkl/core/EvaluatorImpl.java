@@ -87,7 +87,8 @@ public class EvaluatorImpl implements Evaluator {
     frameTransformer = transformer;
     moduleResolver = new ModuleResolver(factories);
     this.logger = new BufferedLogger(logger);
-    packageResolver = PackageResolver.getInstance(securityManager, httpClient, moduleCacheDir);
+    packageResolver =
+        PackageResolver.getInstance(securityManager, httpClient, sftpClient, moduleCacheDir);
     polyglotContext =
         VmUtils.createContext(
             () -> {

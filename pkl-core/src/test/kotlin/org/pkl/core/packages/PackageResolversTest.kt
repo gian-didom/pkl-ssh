@@ -12,12 +12,12 @@ import org.pkl.commons.test.FileTestUtils
 import org.pkl.commons.test.PackageServer
 import org.pkl.commons.test.listFilesRecursively
 import org.pkl.core.http.HttpClient;
-import org.pkl.core.sftp.SftpPklClient
 import org.pkl.core.SecurityManagers
 import org.pkl.core.module.PathElement
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.nio.charset.StandardCharsets
+import org.pkl.core.sftp.SftpPklClient
 import kotlin.io.path.exists
 import kotlin.io.path.readBytes
 
@@ -41,6 +41,11 @@ class PackageResolversTest {
         HttpClient.builder()
           .addCertificates(FileTestUtils.selfSignedCertificate)
           .setTestPort(packageServer.port)
+          .build()
+      }
+
+      val sftpClient: SftpPklClient by lazy {
+        SftpPklClient.builder()
           .build()
       }
     }
@@ -207,11 +212,11 @@ class PackageResolversTest {
     }
 
     override val resolver: PackageResolver = PackageResolvers.DiskCachedPackageResolver(
-      SecurityManagers.defaultManager, httpClient, cacheDir)
+      SecurityManagers.defaultManager, httpClient, sftpClient, cacheDir)
   }
 
   class InMemoryPackageResolverTest : AbstractPackageResolverTest() {
     override val resolver: PackageResolver = PackageResolvers.InMemoryPackageResolver(
-      SecurityManagers.defaultManager, httpClient)
+      SecurityManagers.defaultManager, httpClient, sftpClient)
   }
 }

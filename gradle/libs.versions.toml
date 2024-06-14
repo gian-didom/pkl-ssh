@@ -2,10 +2,12 @@
 antlr = "4.+"
 apacheSshdMina = "2.12.1+"
 assertj = "3.+" 
+bouncyCastle = "1.+"
 checksumPlugin = "1.2.0"
 clikt = "3.5.1"
 commonMark = "0.+"
 downloadTaskPlugin = "5.6.0"
+i2pEDDSA = "0.2.0"
 geantyref = "1.+"
 googleJavaFormat = "1.21.0"
 # must not use `+` because used in download URL
@@ -56,10 +58,14 @@ antlrRuntime = { group = "com.tunnelvisionlabs", name = "antlr4-runtime", versio
 apacheSshdMinaCore = { group = "org.apache.sshd", name = "sshd-core", version.ref = "apacheSshdMina" }
 apacheSshdMinaSFTP = { group = "org.apache.sshd", name = "sshd-sftp", version.ref = "apacheSshdMina" }
 assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
+bouncyCastlePgJDK15On = {group = "org.bouncycastle", name = "bcpg-jdk15on", version.ref = "bouncyCastle"}
+bouncyCastleKixJDK15On = {group = "org.bouncycastle", name = "bcpkix-jdk15on", version.ref = "bouncyCastle"}
+bouncyCastleProvJDK15On = {group = "org.bouncycastle", name = "bcprov-jdk15on", version.ref = "bouncyCastle"}
 clikt = { group = "com.github.ajalt.clikt", name = "clikt", version.ref = "clikt" }
 commonMark = { group = "org.commonmark", name = "commonmark", version.ref = "commonMark" }
 commonMarkTables = { group = "org.commonmark", name = "commonmark-ext-gfm-tables", version.ref = "commonMark" }
 downloadTaskPlugin = { group = "de.undercouch", name = "gradle-download-task", version.ref = "downloadTaskPlugin" }
+i2pEDDSA = { group = "net.i2p.crypto", name = "eddsa", version.ref = "i2pEDDSA"}
 geantyref = { group = "io.leangen.geantyref", name = "geantyref", version.ref = "geantyref" }
 graalCompiler = { group = "org.graalvm.compiler", name = "compiler", version.ref = "graalVm" }
 graalSdk = { group = "org.graalvm.sdk", name = "graal-sdk", version.ref = "graalVm" }

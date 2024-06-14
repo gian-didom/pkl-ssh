@@ -26,16 +26,20 @@ import org.pkl.core.http.HttpClient;
 import org.pkl.core.module.PathElement;
 import org.pkl.core.packages.PackageResolvers.DiskCachedPackageResolver;
 import org.pkl.core.packages.PackageResolvers.InMemoryPackageResolver;
+import org.pkl.core.sftp.SftpPklClient;
 import org.pkl.core.util.Nullable;
 import org.pkl.core.util.Pair;
 
 public interface PackageResolver extends Closeable {
 
   static PackageResolver getInstance(
-      SecurityManager securityManager, HttpClient httpClient, @Nullable Path cachedDir) {
+      SecurityManager securityManager,
+      HttpClient httpClient,
+      SftpPklClient sftpClient,
+      @Nullable Path cachedDir) {
     return cachedDir == null
-        ? new InMemoryPackageResolver(securityManager, httpClient)
-        : new DiskCachedPackageResolver(securityManager, httpClient, cachedDir);
+        ? new InMemoryPackageResolver(securityManager, httpClient, sftpClient)
+        : new DiskCachedPackageResolver(securityManager, httpClient, sftpClient, cachedDir);
   }
 
   DependencyMetadata getDependencyMetadata(PackageUri uri, @Nullable Checksums checksums)

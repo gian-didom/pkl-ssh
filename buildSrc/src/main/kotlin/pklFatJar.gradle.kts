@@ -30,6 +30,8 @@ val relocations = mapOf(
   "org.msgpack." to "org.pkl.thirdparty.msgpack.",
   "org.w3c.dom." to "org.pkl.thirdparty.w3c.dom",
   "org.apache." to "org.pkl.thirdparty.apache.",
+  "org.bouncycastle." to "org.pkl.thirdparty.bouncycastle.",
+  "net.i2p" to "org.pkl.thirdparty.i2p",
   "org.slf4j." to "org.pkl.thirdparty.slf4j.",
   "com.oracle.svm.core." to "org.pkl.thirdparty.svm.",
   

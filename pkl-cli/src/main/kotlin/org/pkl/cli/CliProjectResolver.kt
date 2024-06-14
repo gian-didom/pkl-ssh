@@ -41,6 +41,7 @@ class CliProjectResolver(
             rootDir
           ),
           httpClient,
+          sftpClient,
           moduleCacheDir
         )
       val dependencies = ProjectDependenciesResolver(project, packageResolver, errWriter).resolve()

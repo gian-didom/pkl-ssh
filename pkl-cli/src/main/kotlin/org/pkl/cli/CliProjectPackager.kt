@@ -83,6 +83,7 @@ class CliProjectPackager(
         stackFrameTransformer,
         securityManager,
         httpClient,
+        sftpClient,
         skipPublishCheck,
         consoleWriter
       )

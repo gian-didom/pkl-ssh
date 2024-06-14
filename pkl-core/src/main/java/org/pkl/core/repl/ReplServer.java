@@ -89,7 +89,8 @@ public class ReplServer implements AutoCloseable {
     replState = new ReplState(createEmptyReplModule(BaseModule.getModuleClass().getPrototype()));
 
     var languageRef = new MutableReference<VmLanguage>(null);
-    packageResolver = PackageResolver.getInstance(securityManager, httpClient, moduleCacheDir);
+    packageResolver =
+        PackageResolver.getInstance(securityManager, httpClient, sftpClient, moduleCacheDir);
     projectDependenciesManager =
         projectDependencies == null
             ? null

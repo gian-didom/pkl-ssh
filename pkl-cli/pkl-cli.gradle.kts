@@ -203,9 +203,11 @@ fun Exec.configureExecutable(
     listOf(
         // currently gives a deprecation warning, but we've been told 
         // that the "initialize everything at build time" *CLI* option is likely here to stay
-        "--initialize-at-build-time="
+        "--initialize-at-run-time="
         // needed for messagepack-java (see https://github.com/msgpack/msgpack-java/issues/600)
         ,"--initialize-at-run-time=org.msgpack.core.buffer.DirectBufferAccess"
+        ,"--initialize-at-run-time=org.pkl.core.sftp.ApacheMinaSftpClient"
+        ,"--link-at-build-time"
         ,"--no-fallback"
         ,"-Djavax.net.ssl.trustStore=${trustStore.get().asFile}"
         ,"-Djavax.net.ssl.trustStorePassword=$trustStorePassword"
@@ -221,7 +223,7 @@ fun Exec.configureExecutable(
         // the actual limit (currently) used by native-image is this number + 1400 (idea is to compensate for Truffle's own nodes)
         ,"-H:MaxRuntimeCompileMethods=1800"
         ,"-H:+EnforceMaxRuntimeCompileMethods"
-        ,"--enable-url-protocols=http,https"
+        ,"--enable-url-protocols=http,https,sftp"
         ,"-H:+ReportExceptionStackTraces"
         // disable automatic support for JVM CLI options (puts our main class in full control of argument parsing)
         ,"-H:-ParseRuntimeOptions"

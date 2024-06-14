@@ -37,7 +37,7 @@ import org.pkl.core.packages.*
 class CliDocGenerator(private val options: CliDocGeneratorOptions) : CliCommand(options.base) {
 
   private val packageResolver =
-    PackageResolver.getInstance(securityManager, httpClient, moduleCacheDir)
+    PackageResolver.getInstance(securityManager, httpClient, sftpClient, moduleCacheDir)
 
   private val stdlibDependency =
     DocPackageInfo.PackageDependency(
