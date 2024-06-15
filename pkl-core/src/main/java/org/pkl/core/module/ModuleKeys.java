@@ -533,7 +533,7 @@ public final class ModuleKeys {
         throws IOException, SecurityManagerException {
       var sftpClient = VmContext.get(null).getSftpPklClient();
       String username = uri.getUserInfo();
-      sftpClient.setUsername(uri.getUserInfo());
+      sftpClient.setUsername(username);
       sftpClient.setHost(uri.getHost());
       // Extract path from URI
       String path = uri.getPath();

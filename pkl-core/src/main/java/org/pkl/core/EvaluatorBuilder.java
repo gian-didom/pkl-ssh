@@ -104,8 +104,8 @@ public final class EvaluatorBuilder {
         .addResourceReader(ResourceReaders.externalProperty())
         .addResourceReader(ResourceReaders.file())
         .addResourceReader(ResourceReaders.http())
-        .addResourceReader(ResourceReaders.sftp())
         .addResourceReader(ResourceReaders.https())
+        .addResourceReader(ResourceReaders.sftp())
         .addResourceReader(ResourceReaders.pkg())
         .addResourceReader(ResourceReaders.projectpackage())
         .addModuleKeyFactory(ModuleKeyFactories.standardLibrary);

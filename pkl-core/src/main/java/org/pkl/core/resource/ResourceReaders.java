@@ -338,6 +338,7 @@ public final class ResourceReaders {
         var sftpClient = VmContext.get(null).getSftpPklClient();
         String username = uri.getUserInfo();
         String host = uri.getHost();
+        System.out.println("Connecting to " + host + " as " + username + ". URI: " + uri);
         sftpClient.setUsername(username);
         sftpClient.setHost(host);
         String path = uri.getPath();

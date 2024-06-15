@@ -224,6 +224,7 @@ abstract class CliCommand(protected val cliOptions: CliBaseOptions) {
       add(ResourceReaders.file())
       add(ResourceReaders.http())
       add(ResourceReaders.https())
+      add(ResourceReaders.sftp())
     }
   }
 
