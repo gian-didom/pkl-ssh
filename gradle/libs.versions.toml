@@ -99,6 +99,7 @@ pklConfigJavaAll025 = { group = "org.pkl-lang", name = "pkl-config-java-all", ve
 shadowPlugin = { group = "com.github.johnrengelman", name = "shadow", version.ref = "shadowPlugin" }
 slf4jApi = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
 slf4jSimple = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
+slf4jNop = { group = "org.slf4j", name = "slf4j-nop", version.ref = "slf4j" }
 snakeYaml = { group = "org.snakeyaml", name = "snakeyaml-engine", version.ref = "snakeYaml" }
 spotlessPlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotlessPlugin"}
 svm = { group = "org.graalvm.nativeimage", name = "svm", version.ref = "graalVm" }

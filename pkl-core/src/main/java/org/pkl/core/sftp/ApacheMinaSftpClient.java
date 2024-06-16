@@ -74,10 +74,8 @@ final class ApacheMinaSftpClient implements SftpPklClient {
   }
 
   public void auth() throws IOException {
-    System.out.println("Connecting to " + host + " as " + username);
     session = sshClient.connect(username, host, port).verify(connectTimeout).getSession();
     session.auth().verify(connectTimeout);
-    System.out.println("Connected to " + host + " as " + username);
   }
 
   @Override
@@ -90,12 +88,9 @@ final class ApacheMinaSftpClient implements SftpPklClient {
 
     this.auth();
     this.sftpClient = SftpClientFactory.instance().createSftpClient(session);
-    System.out.println("Downloading " + remotePath);
     try (var remoteInputStream = sftpClient.read(remotePath)) {
       var buffer = new ByteArrayOutputStream();
       remoteInputStream.transferTo(buffer);
-      // Print string
-      System.out.println(buffer.toString());
       // session.close();
       return buffer.toByteArray();
       // Disconnect

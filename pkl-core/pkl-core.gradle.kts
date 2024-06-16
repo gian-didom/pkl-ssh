@@ -50,7 +50,7 @@ dependencies {
   implementation(libs.antlrRuntime)
   implementation(libs.truffleApi)
   implementation(libs.graalSdk)
-  implementation(libs.slf4jSimple)
+  implementation(libs.slf4jNop)
   // implementation(libs.i2pEDDSA)
   // implementation(libs.bouncyCastlePgJDK15On)
   // implementation(libs.bouncyCastleKixJDK15On)
